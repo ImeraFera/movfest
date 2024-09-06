@@ -12,68 +12,65 @@ function Dashboard() {
             <Box m={2}>
                 <Typography variant='h4'>Bugün Ne İzlesem ?</Typography>
             </Box>
-            {/* <RandomMoviesCarousel></RandomMoviesCarousel> */}
-            <Grid container border={3} spacing={2}  >
-                <Grid container border={2} maxWidth={'xl'} >
-                    <Grid border={1} size={12}>
-                        <Box m={2}>
-                            <Typography variant='h4'>Yeni Filmler</Typography>
-                        </Box>
-                    </Grid>
-
-
-                    {/* <Grid size={12} >
-                       
-                        <Stack direction={'row'} flexWrap={'wrap'} justifyContent={'center'}   >
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                            <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
-                                <MovieCard></MovieCard>
-                            </Grid>
-                        </Stack>
-                        <Stack alignItems={'center'}>
-                            <Pagination count={12} size='large' color="primary" />
-                        </Stack>
-                    </Grid> */}
-
+            <RandomMoviesCarousel></RandomMoviesCarousel>
+            {/* sütun 2 */}
+            <Grid container spacing={2}  >
+                <Grid size={{ lg: 9, md: 9, sm: 9, xs: 12 }} >
+                    <Box m={2}>
+                        <Typography variant='h4'>Yeni Filmler</Typography>
+                    </Box>
+                    <Stack direction={'row'} flexWrap={'wrap'} justifyContent={'center'}   >
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                        <Grid size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
+                            <MovieCard></MovieCard>
+                        </Grid>
+                    </Stack>
+                    <Stack alignItems={'center'}>
+                        <Pagination count={12} size='large' color="primary" />
+                    </Stack>
                 </Grid>
-                <Grid container border={2} maxWidth={'xl'}>
-                    <Grid size={12}>
-                        <Box>
-                            aslşdm
-                        </Box>
-                    </Grid>
+                {/* sütun 2 */}
+                <Grid size={{ lg: 3, md: 3, sm: 3, xs: 12, }} >
+                    <Box m={2} >
+                        <Typography variant='h4'>Trend Filmler</Typography>
+                    </Box>
+                    <Stack direction={'row'} flexWrap={'wrap'} justifyContent={'center'}   >
+                        <Grid size={12}>
+                            <MovieCard></MovieCard>
+                        </Grid>
+                    </Stack>
                 </Grid>
             </Grid>
 
