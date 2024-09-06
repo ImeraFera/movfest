@@ -1,0 +1,1 @@
+export const MOVIE_API_KEY = '87c0cb74';
