@@ -1,0 +1,58 @@
+/* .info-label-container {
+    color: white !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 20%;
+}
+
+.header-container {
+    width: 100%;
+    background-color: #303030;
+    border-radius: 1em;
+}
+
+.movie-name {
+    width: 80%;
+}
+
+.info-label {
+    background-color: #404040;
+    padding: 0.5em;
+    border-radius: 1em;
+}
+
+.movie-info-container {
+    width: 100%;
+    display: flex;
+    border-radius: 1em;
+    border: 1px solid #303030;
+    background-color: #303030;
+}
+
+
+
+.movie-info {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.5em;
+}
+
+.movie-abstract {
+    width: 100%;
+    display: flex;
+    height: 50%;
+    overflow-y: auto;
+}
+
+.movie-details {
+    width: 100%;
+    display: flex;
+    height: 50%;
+
+} */
+
+.video-player {
+    aspect-ratio: 16/9;
+}

@@ -18,7 +18,7 @@ function App() {
           <MainRoutes></MainRoutes>
         </PageContainer>
 
-        <Footer />
+        {/* <Footer /> */}
       </ThemeProvider>
     </>
   )
