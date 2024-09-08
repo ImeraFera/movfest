@@ -62,7 +62,7 @@ function Dashboard() {
                     </Stack>
                 </Grid >
                 {/* sütun 2 */}
-                <Grid Grid size={{ lg: 3, md: 3, sm: 3, xs: 12, }
+                <Grid size={{ lg: 3, md: 3, sm: 3, xs: 12, }
                 } >
                     <Box m={2} >
                         <Typography variant='h4'>Trend Filmler</Typography>

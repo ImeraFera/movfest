@@ -1,4 +1,4 @@
-import { Box, List, ListItem, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, List, ListItem, Stack, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import React from 'react';
 import ReactPlayer from 'react-player';
@@ -84,6 +84,76 @@ function MovieDetails() {
                             left: 0
                         }}
                     />
+                </Box>
+            </Grid>
+            <Grid size={{ lg: 3, md: 4, sm: 5, xs: 12 }} mt={0} mb={0} display="flex" justifyContent="center" alignItems={'center'} bgcolor={'#303030'} p={1}>
+                <Box display="flex" flexDirection={'column'} alignItems={'center'} >
+                    <Box display={'flex'} py={1}>
+                        <TextField fullWidth label='İsim' variant='standard' color='primary'>
+                        </TextField>
+                    </Box>
+                    <Box display={'flex'} py={1}>
+                        <TextField fullWidth label='E-mail' variant='standard' color='primary'>
+                        </TextField>
+                    </Box>
+                    <Box display={'flex'} py={1}>
+                        <TextField fullWidth multiline rows={3} label='Yorum' variant='standard' color='primary'>
+                        </TextField>
+                    </Box>
+                    <Box display={'flex'} py={1}>
+                        <FormControlLabel control={<Checkbox />} label="Spoiler İçeriyor" />
+                    </Box>
+                    <Box display={'flex'} py={1}>
+                        <Button variant='outlined' >Gönder</Button>
+                    </Box>
+                </Box>
+            </Grid>
+
+            {/* Comments column */}
+            <Grid size={{ lg: 9, md: 8, sm: 7, xs: 12 }} mt={0} mb={0} bgcolor={'#303030'} py={2} >
+                <Box px={5} py={1}>
+                    <Typography variant='h5'>Yorumlar</Typography>
+                </Box>
+                <hr style={{ maxWidth: '90%' }} />
+                <Box sx={{ flex: 1, overflowY: 'auto', maxHeight: '35vh', mb: 2 }}>
+                    <Stack direction={'row'} flexWrap={'wrap'} justifyContent={'center'} align  >
+                        <Grid size={10} m={2} mt={1} >
+                            <Card sx={{ bgcolor: '#404040', color: 'white', borderRadius: '1em' }}>
+                                <CardContent>
+                                    <Typography gutterBottom color='#97156C'>
+                                        Ahmet Furkan Sayan
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        well meaning and kindly.
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid size={10} m={2} mt={1} >
+                            <Card sx={{ bgcolor: '#404040', color: 'white', borderRadius: '1em' }}>
+                                <CardContent>
+                                    <Typography gutterBottom color='#97156C'>
+                                        Ahmet Furkan Sayan
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        well meaning and kindly.
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid size={10} m={2} mt={1} >
+                            <Card sx={{ bgcolor: '#404040', color: 'white', borderRadius: '1em' }}>
+                                <CardContent>
+                                    <Typography gutterBottom color='#97156C'>
+                                        Ahmet Furkan Sayan
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        well meaning and kindly.
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Stack>
                 </Box>
             </Grid>
 

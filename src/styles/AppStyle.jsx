@@ -9,6 +9,40 @@ export const theme = createTheme({
         },
     },
     components: {
+        MuiCheckbox: {
+            styleOverrides: {
+                root: {
+                    color: '#97156C',
+                }
+            }
+        },
+        MuiTextField: {
+            styleOverrides: {
+                root: {
+                    '& .MuiInputBase-input': {
+                        color: 'white', // Input text color
+                    },
+                    '& .MuiInputLabel-root': {
+                        color: 'white',
+                        '&.Mui-focused': {
+                            color: '#97156C',
+                        },
+                    },
+                    '& .MuiInput-underline:before': {
+                        borderBottomColor: '#97156C',
+                    },
+                    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                        borderBottomColor: '#97156C',
+                    },
+                    '& .MuiInput-underline:after': {
+                        borderBottomColor: '#97156C',
+                    }
+                },
+
+
+            },
+
+        },
         MuiPaginationItem: {
             styleOverrides: {
                 root: {
