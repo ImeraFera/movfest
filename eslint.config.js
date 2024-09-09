@@ -37,23 +37,23 @@ export default [
   },
 ]
 
-module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-  ],
-  rules: {
-    "no-unused-vars": "off",
-    'react/jsx-no-target-blank': 'off',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
-  },
-  settings: {
-    react: {
-      version: 'detect', // React versiyonunu otomatik algıla
-    },
-  },
-};
+// module.exports = {
+//   extends: [
+//     'eslint:recommended',
+//     'plugin:react/recommended',
+//     'plugin:react-hooks/recommended',
+//   ],
+//   rules: {
+//     "no-unused-vars": "off",
+//     'react/jsx-no-target-blank': 'off',
+//     'react-refresh/only-export-components': [
+//       'warn',
+//       { allowConstantExport: true },
+//     ],
+//   },
+//   settings: {
+//     react: {
+//       version: 'detect', // React versiyonunu otomatik algıla
+//     },
+//   },
+// };

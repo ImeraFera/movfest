@@ -56,8 +56,6 @@ function RandomMoviesCarousel() {
 
                         slidesPerView={5}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
-                        onSlideChange={() => console.log('slide change')}
-                        onSwiper={(swiper) => console.log(swiper)}
                     >
                         {slides.map((_, index) => (
                             <SwiperSlide key={index}>

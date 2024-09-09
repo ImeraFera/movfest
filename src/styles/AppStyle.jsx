@@ -9,6 +9,25 @@ export const theme = createTheme({
         },
     },
     components: {
+        // MuiFormHelperText: {
+        //     styleOverrides: {
+        //         root: {
+        //             color: 'red',
+        //         },
+        //     },
+        // },
+        MuiAlert: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'green',
+                    color: 'white',
+
+                },
+                icon: {
+                    color: 'white',
+                }
+            },
+        },
         MuiCheckbox: {
             styleOverrides: {
                 root: {
@@ -20,7 +39,7 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     '& .MuiInputBase-input': {
-                        color: 'white', // Input text color
+                        color: 'white',
                     },
                     '& .MuiInputLabel-root': {
                         color: 'white',

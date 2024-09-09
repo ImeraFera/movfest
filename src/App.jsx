@@ -6,19 +6,25 @@ import Footer from './components/Footer'
 import { theme } from './styles/AppStyle';
 import { ThemeProvider } from '@mui/material'
 import MainRoutes from './routes/MainRoutes'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
 
   return (
     <>
+      <ToastContainer />
 
       <ThemeProvider theme={theme}>
+
         <Navbar />
 
         <PageContainer >
+
           <MainRoutes></MainRoutes>
         </PageContainer>
 
-        {/* <Footer /> */}
+        <Footer />
       </ThemeProvider>
     </>
   )

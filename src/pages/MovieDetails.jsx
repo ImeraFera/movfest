@@ -1,12 +1,12 @@
-import { Box, Button, Card, CardContent, List, ListItem, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Checkbox, FormControlLabel, List, ListItem, Stack, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import React from 'react';
 import ReactPlayer from 'react-player';
 import '../css/MovieDetails.css'
 function MovieDetails() {
     return (
-        <Grid container spacing={2} justifyContent={'center'}>
-            <Grid size={12} display={'flex'} bgcolor={'#303030'} justifyContent={'space-between'} px={5} py={2}>
+        <Grid container spacing={2} >
+            <Grid mt={0} mb={0} size={12} display={'flex'} bgcolor={'#303030'} justifyContent={'space-between'} px={5} py={2}>
 
                 <Box>
                     <Typography variant='h4'>Avengers End Game</Typography>
@@ -26,7 +26,7 @@ function MovieDetails() {
                 <img src="/img/1.png" alt="Movie Poster" style={{ maxWidth: '100%', }} />
             </Grid>
 
-            <Grid mt={0} sx={{ backgroundColor: '#303030' }} mb={0} size={{ xs: 12, sm: 12, lg: 9, md: 6 }} display="flex" flexDirection="column" padding={2} justifyContent={'space-between'}>
+            <Grid mt={0} mb={0} sx={{ backgroundColor: '#303030' }} size={{ xs: 12, sm: 12, lg: 9, md: 6 }} display="flex" flexDirection="column" padding={2} justifyContent={'space-between'}>
                 <Box sx={{ flex: 1, overflowY: 'auto', maxHeight: '40vh', mb: 2 }}>
                     <Typography variant="body1">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem a necessitatibus dolore illo natus? Perspiciatis cupiditate sapiente et illum similique nisi ipsum, libero vel. Doloribus cumque quam corporis ptate delectus ipsa minus quibusdam ab, laudantium non possimus atque aspernatur aperiam unde facilis!
@@ -64,7 +64,7 @@ function MovieDetails() {
                 </Box>
             </Grid>
 
-            <Grid size={{ xs: 12, lg: 8 }} display="flex" justifyContent="center" sx={{ backgroundColor: '#303030', p: 2, }}>
+            <Grid mt={0} mb={0} size={{ xs: 12, lg: 8, md: 12 }} offset={{ lg: 2 }} display="flex" sx={{ backgroundColor: '#303030', p: 2, }}>
                 <Box
                     sx={{
                         position: 'relative',
@@ -86,6 +86,7 @@ function MovieDetails() {
                     />
                 </Box>
             </Grid>
+
             <Grid size={{ lg: 3, md: 4, sm: 5, xs: 12 }} mt={0} mb={0} display="flex" justifyContent="center" alignItems={'center'} bgcolor={'#303030'} p={1}>
                 <Box display="flex" flexDirection={'column'} alignItems={'center'} >
                     <Box display={'flex'} py={1}>
@@ -109,8 +110,9 @@ function MovieDetails() {
                 </Box>
             </Grid>
 
+
             {/* Comments column */}
-            <Grid size={{ lg: 9, md: 8, sm: 7, xs: 12 }} mt={0} mb={0} bgcolor={'#303030'} py={2} >
+            <Grid mt={0} mb={0} size={{ lg: 9, md: 8, sm: 7, xs: 12 }} bgcolor={'#303030'} py={2} >
                 <Box px={5} py={1}>
                     <Typography variant='h5'>Yorumlar</Typography>
                 </Box>
@@ -120,9 +122,12 @@ function MovieDetails() {
                         <Grid size={10} m={2} mt={1} >
                             <Card sx={{ bgcolor: '#404040', color: 'white', borderRadius: '1em' }}>
                                 <CardContent>
-                                    <Typography gutterBottom color='#97156C'>
-                                        Ahmet Furkan Sayan
-                                    </Typography>
+                                    <Box flexDirection={'row'} display={'flex'} justifyContent={'space-between'}>
+                                        <Typography gutterBottom color='#97156C'>
+                                            Ahmet Furkan Sayan
+                                        </Typography>
+                                        <Typography variant='body1'>12.02.2023</Typography>
+                                    </Box>
                                     <Typography variant="body2">
                                         well meaning and kindly.
                                     </Typography>
@@ -132,9 +137,12 @@ function MovieDetails() {
                         <Grid size={10} m={2} mt={1} >
                             <Card sx={{ bgcolor: '#404040', color: 'white', borderRadius: '1em' }}>
                                 <CardContent>
-                                    <Typography gutterBottom color='#97156C'>
-                                        Ahmet Furkan Sayan
-                                    </Typography>
+                                    <Box flexDirection={'row'} display={'flex'} justifyContent={'space-between'}>
+                                        <Typography gutterBottom color='#97156C'>
+                                            Ahmet Furkan Sayan
+                                        </Typography>
+                                        <Typography variant='body1'>12.02.2023</Typography>
+                                    </Box>
                                     <Typography variant="body2">
                                         well meaning and kindly.
                                     </Typography>
@@ -144,9 +152,12 @@ function MovieDetails() {
                         <Grid size={10} m={2} mt={1} >
                             <Card sx={{ bgcolor: '#404040', color: 'white', borderRadius: '1em' }}>
                                 <CardContent>
-                                    <Typography gutterBottom color='#97156C'>
-                                        Ahmet Furkan Sayan
-                                    </Typography>
+                                    <Box flexDirection={'row'} display={'flex'} justifyContent={'space-between'}>
+                                        <Typography gutterBottom color='#97156C'>
+                                            Ahmet Furkan Sayan
+                                        </Typography>
+                                        <Typography variant='body1'>12.02.2023</Typography>
+                                    </Box>
                                     <Typography variant="body2">
                                         well meaning and kindly.
                                     </Typography>
@@ -157,14 +168,6 @@ function MovieDetails() {
                 </Box>
             </Grid>
 
-            <Grid size={12} display="flex" justifyContent="center" bgcolor={'#303030'} px={5} py={2}>
-                <Box>
-                    <TextField variant='standard'>
-
-                    </TextField>
-                </Box>
-
-            </Grid>
         </Grid >
     );
 }

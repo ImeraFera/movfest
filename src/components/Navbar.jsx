@@ -23,7 +23,7 @@ function Navbar() {
 
     return (
         <AppBar position="static" sx={{ padding: 1, }} color='transparent'>
-            <Toolbar>
+            <Toolbar >
                 {/* Menu Icon for Mobile */}
                 <IconButton
                     size="large"
@@ -35,25 +35,66 @@ function Navbar() {
                 >
                     <MenuIcon />
                 </IconButton>
+                <Box flexDirection={'row'} flex={1} justifyContent={'space-between'} display={'flex'}>
 
-                <Typography variant="h5" >
-                    <Link color="inherit" href="/" underline="none">
-                        Movfest
-                    </Link>
-                </Typography>
+                    <Box display={'flex'}>
+                        <Typography variant="h5" >
+                            <Link color="inherit" href="/" underline="none">
+                                Movfest
+                            </Link>
+                        </Typography>
+                    </Box>
+                    <Box display={'flex'}>
+                        <Stack
+                            direction="row"
+                            justifyContent={'center'} alignItems={'center'}
+                            display={{ xs: 'none', md: 'flex' }}
+                        >
+                            <Button color='inherit' onClick={() => navigate('/filmler')}>Filmler</Button>
+                            <Button color='inherit' onClick={() => navigate('/kategoriler')}>Kategoriler</Button>
+                            <Button color='inherit' onClick={() => navigate('/iletisim')}>İletişim</Button>
+                        </Stack>
+                    </Box>
+                    <Box>
+                        <Button
+                            variant="outlined"
+                            color='primary'
+                            sx={{ marginLeft: 2 }}
+                            onClick={handleMenuOpen}
+                        >
+                            Hesabım
+                        </Button>
+                    </Box>
+                </Box>
 
-                <Stack
-                    direction="row"
-                    display={{ xs: 'none', md: 'flex' }}
-                    sx={{ marginX: 'auto' }}
-                    margin={1}
+                <Menu
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={handleMenuClose}
+                    sx={{
+                        '& .MuiPaper-root': {
+                            backgroundColor: '#202020',
+                            color: 'white',
+                        },
+                    }}
                 >
-                    <Button color='inherit' onClick={() => navigate('/filmler')}>Filmler</Button>
-                    <Button color='inherit' onClick={() => navigate('/kategoriler')}>Kategoriler</Button>
-                    <Button color='inherit' onClick={() => navigate('/populer')}>Popüler</Button>
-                    <Button color='inherit' onClick={() => navigate('/yeniler')}>Yeniler</Button>
-                    <Button color='inherit' onClick={() => navigate('/iletisim')}>İletişim</Button>
-                </Stack>
+                    <MenuItem sx={{
+                        '&:hover': {
+                            color: '#ff4081',
+                        },
+                    }} onClick={handleMenuClose}>Profile</MenuItem>
+                    <MenuItem sx={{
+                        '&:hover': {
+                            color: '#ff4081',
+                        },
+                    }} onClick={handleMenuClose}>My account</MenuItem>
+                    <MenuItem sx={{
+                        '&:hover': {
+                            color: '#ff4081',
+                        },
+                    }} onClick={handleMenuClose}>Logout</MenuItem>
+                </Menu>
 
                 <Drawer
                     anchor="left"
@@ -86,8 +127,6 @@ function Navbar() {
                         </List>
                     </Box>
                 </Drawer>
-
-                <Button variant="outlined" color='primary' sx={{ marginLeft: 2 }}>Hesabım</Button>
             </Toolbar>
         </AppBar>
     )
