@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Grid from '@mui/material/Grid2'
 import { Formik, Form, ErrorMessage } from 'formik';
-import { Box, Button, CircularProgress, TextField, Typography, Alert, FormHelperText } from '@mui/material';
-import userService from '../services/userService';
+import { Box, Button, CircularProgress, TextField, Typography, } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import { notify } from '../utils/toastMessage';
 import { registerSchema } from '../validations/registerSchema';
-
+import { signUp } from '../services/authService';
+import { setIsLoading } from '../redux/slices/appSlice';
+import { useDispatch, useSelector } from 'react-redux';
 function Register() {
 
     const navigation = useNavigate()
-    const [loading, setloading] = useState(false);
+    const isLoading = useSelector((state) => state.app.isLoading);
+    const dispatch = useDispatch();
 
     const handleSubmit = async (values) => {
-        const userData = {
-            email: values.email
-        }
-        setloading(true);
-        const alreadyExist = await userService.register(userData);
-        setloading(false);
 
-        // ! alreadyExist false ise kullanıcı kayıt olabilir demek
-        if (alreadyExist) {
-            notify('Bu e-mail zaten kayıtlı! ', 'error')
-        } else {
+        dispatch(setIsLoading(true));
+        try {
+
+            const user = await signUp(values.email, values.password);
             notify('Başarıyla kayıt oldunuz!', 'success')
             return navigation('/');
+
+        } catch (error) {
+            notify(error.message, 'error')
+            // console.log(error)
+        }
+        finally {
+            dispatch(setIsLoading(false));
         }
     }
 
@@ -122,9 +125,9 @@ function Register() {
                                 <Box display={'flex'} mt={3}>
                                     <Button fullWidth
                                         type='submit'
-                                        disabled={loading}
+                                        disabled={isLoading}
                                         variant='outlined'>
-                                        {(loading) ? <CircularProgress color='primary' size={'2em'} /> : 'Kayıt Ol'}
+                                        {(isLoading) ? <CircularProgress color='primary' size={'2em'} /> : 'Kayıt Ol'}
                                     </Button>
                                 </Box>
                             </Form>

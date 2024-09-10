@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Paper, Box, Typography, Container, Card, CardContent, CardActions, Button, Stack, Pagination, Link } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import RandomMoviesCarousel from '../components/RandomMoviesCarousel';

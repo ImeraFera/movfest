@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import PageContainer from './components/containers/PageContainer'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -8,6 +7,7 @@ import { ThemeProvider } from '@mui/material'
 import MainRoutes from './routes/MainRoutes'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css'
 
 function App() {
 

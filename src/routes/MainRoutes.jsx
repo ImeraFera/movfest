@@ -7,6 +7,7 @@ import MovieDetails from '../pages/MovieDetails'
 import NotFound from '../pages/NotFound'
 import Register from '../pages/Register'
 import Login from '../pages/Login'
+import Profile from '../pages/Profile'
 
 
 function MainRoutes() {
@@ -18,6 +19,7 @@ function MainRoutes() {
             <Route path="/kategoriler" element={<Categories />} />
             <Route path="/kategoriler/:kategori_ad" element={<Categories />} />
             <Route path="/filmler/:film_id" element={<MovieDetails />} />
+            <Route path="/profilim" element={<Profile />} />
             <Route path="/kayit" element={<Register />} />
             <Route path="/giris" element={<Login />} />
 

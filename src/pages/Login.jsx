@@ -2,43 +2,41 @@ import React, { useEffect, useState } from 'react'
 import Grid from '@mui/material/Grid2'
 import { Formik, Form, ErrorMessage } from 'formik';
 import { Box, Button, CircularProgress, TextField, Typography, Alert, FormHelperText } from '@mui/material';
-import userService from '../services/userService';
 import { useNavigate } from 'react-router-dom'
 import { notify } from '../utils/toastMessage';
 import { loginSchema } from '../validations/loginSchema';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsLoading } from '../redux/slices/appSlice';
+import { login, } from '../redux/slices/authSlice';
 
 function Login() {
 
     const navigation = useNavigate()
-    const [loading, setloading] = useState(false);
-
+    const isLoading = useSelector((state) => state.app.isLoading)
+    const dispatch = useDispatch();
     const handleSubmit = async (values) => {
-        const userData = {
+        dispatch(setIsLoading(true));
+        try {
 
-            email: values.email,
-            password: values.password,
+            dispatch(login(values))
+            notify('Giriş Başarılı!', 'success',)
+            return navigation('/')
+
+
+        } catch (error) {
+            console.log(error)
+            notify('E-mail veya şifre yanlış!', 'error')
+        }
+        finally {
+            dispatch(setIsLoading(false));
         }
 
-        setloading(true);
-        const alreadyExist = await userService.login(userData);
-        setloading(false);
-
-        // ! alreadyExist false ise kullanıcı kayıt olabilir demek
-        if (alreadyExist) {
-            notify('E-mail veya şifre hatalı! ', 'error')
-        } else {
-            notify('Başarıyla giriş yaptınız!', 'success')
-            return navigation('/');
-        }
     }
 
     const formik = {
         initialValues: {
-            username: '',
             email: '',
             password: '',
-            repeatPassword: '',
         },
         onSubmit: handleSubmit,
     }
@@ -97,9 +95,9 @@ function Login() {
                                 <Box display={'flex'} mt={3}>
                                     <Button fullWidth
                                         type='submit'
-                                        disabled={loading}
+                                        disabled={isLoading}
                                         variant='outlined'>
-                                        {(loading) ? <CircularProgress color='primary' size={'2em'} /> : 'Giriş Yap'}
+                                        {(isLoading) ? <CircularProgress color='primary' size={'2em'} /> : 'Giriş Yap'}
                                     </Button>
                                 </Box>
                             </Form>

@@ -1,11 +1,17 @@
-import { AppBar, Box, Button, IconButton, Stack, Toolbar, Typography, Link, Menu, MenuItem, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Box, Button, IconButton, Stack, Toolbar, Typography, Link, Menu, MenuItem, Drawer, List, ListItem, ListItemText, Avatar } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useSelector } from 'react-redux';
+import { _signOut } from '../services/authService';
+import { getAuth } from 'firebase/auth';
+import { notify } from '../utils/toastMessage'
+import { getErrorMessage } from '../errors/ErrorCodes'
 function Navbar() {
+
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
+    const user = getAuth().currentUser || null;
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -20,6 +26,22 @@ function Navbar() {
     const toggleDrawer = (open) => (event) => {
         setOpen(open);
     };
+
+    const goto = (path) => {
+        handleMenuClose();
+        navigate(path)
+    }
+
+    const handleSignOut = async () => {
+        try {
+            notify('Başarıyla çıkış yaptınız!', 'success')
+            await _signOut();
+            return goto('/');
+        } catch (error) {
+            notify(error.message, 'error')
+        }
+
+    }
 
     return (
         <AppBar position="static" sx={{ padding: 1, }} color='transparent'>
@@ -58,11 +80,25 @@ function Navbar() {
                     <Box>
                         <Button
                             variant="outlined"
-                            color='primary'
-                            sx={{ marginLeft: 2 }}
+                            color="primary"
+                            sx={{
+                                marginLeft: 2,
+                                minWidth: 'auto',
+                                width: 40, // Avatar boyutuyla uyumlu genişlik
+                                height: 40, // Avatar boyutuyla uyumlu yükseklik
+                                '&:hover': {
+                                    backgroundColor: 'action.hover',
+                                },
+                            }}
                             onClick={handleMenuOpen}
                         >
-                            Hesabım
+                            <Avatar
+                                variant="circular"
+                                sx={{
+                                    width: 36,
+                                    height: 36,
+                                }}
+                            />
                         </Button>
                     </Box>
                 </Box>
@@ -79,21 +115,41 @@ function Navbar() {
                         },
                     }}
                 >
-                    <MenuItem sx={{
-                        '&:hover': {
-                            color: '#ff4081',
-                        },
-                    }} onClick={handleMenuClose}>Profile</MenuItem>
-                    <MenuItem sx={{
-                        '&:hover': {
-                            color: '#ff4081',
-                        },
-                    }} onClick={handleMenuClose}>My account</MenuItem>
-                    <MenuItem sx={{
-                        '&:hover': {
-                            color: '#ff4081',
-                        },
-                    }} onClick={handleMenuClose}>Logout</MenuItem>
+
+                    {(user &&
+                        <Box>
+                            <MenuItem sx={{
+                                '&:hover': {
+                                    color: '#ff4081',
+                                },
+                            }}
+                                onClick={() => goto('/profilim')}  >Profilim</MenuItem>
+                            <MenuItem sx={{
+                                '&:hover': {
+                                    color: '#ff4081',
+                                },
+                            }} onClick={handleSignOut}>Çıkış Yap</MenuItem>
+                        </Box>
+
+                    )}
+                    {(!user &&
+                        <Box>
+                            <MenuItem sx={{
+                                '&:hover': {
+                                    color: '#ff4081',
+                                },
+                            }} onClick={() => goto('/giris')}>Giriş Yap</MenuItem>
+                            <MenuItem sx={{
+                                '&:hover': {
+                                    color: '#ff4081',
+                                },
+                            }} onClick={() => navigate('/kayit')}>
+                                Kayıt Ol
+                            </MenuItem>
+                        </Box>
+
+                    )}
+
                 </Menu>
 
                 <Drawer
