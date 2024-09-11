@@ -8,7 +8,7 @@ import NotFound from '../pages/NotFound'
 import Register from '../pages/Register'
 import Login from '../pages/Login'
 import Profile from '../pages/Profile'
-
+import ProtectedRoute from '../utils/ProtectedRoute';
 
 function MainRoutes() {
     return (
@@ -19,8 +19,14 @@ function MainRoutes() {
             <Route path="/kategoriler" element={<Categories />} />
             <Route path="/kategoriler/:kategori_ad" element={<Categories />} />
             <Route path="/filmler/:film_id" element={<MovieDetails />} />
-            <Route path="/profilim" element={<Profile />} />
+
+            <Route element={<ProtectedRoute />}>
+                <Route path="/profilim" element={<Profile />} />
+            </Route>
+
+
             <Route path="/kayit" element={<Register />} />
+
             <Route path="/giris" element={<Login />} />
 
             <Route path='*' element={<NotFound />}></Route>

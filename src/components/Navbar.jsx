@@ -2,16 +2,25 @@ import { AppBar, Box, Button, IconButton, Stack, Toolbar, Typography, Link, Menu
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { _signOut } from '../services/authService';
-import { getAuth } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { _signOut, getToken } from '../services/authService';
 import { notify } from '../utils/toastMessage'
 import { getErrorMessage } from '../errors/ErrorCodes'
+// import { login } from '../redux/slices/authSlice';
+
+
 function Navbar() {
 
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
-    const user = getAuth().currentUser || null;
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+
+        const token = getToken();
+        setToken(token);
+
+    }, [])
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -116,7 +125,7 @@ function Navbar() {
                     }}
                 >
 
-                    {(user &&
+                    {(token &&
                         <Box>
                             <MenuItem sx={{
                                 '&:hover': {
@@ -132,7 +141,7 @@ function Navbar() {
                         </Box>
 
                     )}
-                    {(!user &&
+                    {(!token &&
                         <Box>
                             <MenuItem sx={{
                                 '&:hover': {

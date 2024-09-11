@@ -7,14 +7,14 @@ import { notify } from '../utils/toastMessage';
 import { loginSchema } from '../validations/loginSchema';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileSchema } from '../validations/profileSchema';
-import { getCurrentUser } from '../services/authService';
+import { getUserDetails } from '../services/userService';
 function Profile() {
     const [avatar, setAvatar] = useState(null);
     const isLoading = useSelector((state) => state.app.isLoading)
     const fileInputRef = useRef(null);
     const dispatch = useDispatch();
 
-
+    const [formVals, setFormVals] = useState({ email: '', newPassword: '', username: '' });
     const handleAvatarClick = () => {
         if (fileInputRef.current) {
             fileInputRef.current.click();
@@ -22,20 +22,14 @@ function Profile() {
     };
 
     useEffect(() => {
-        // Asenkron işlevi tanımla
+
         const fetchData = async () => {
-            try {
-                const result = await dispatch(getCurrentUser());
-                console.log(result);
-            } catch (error) {
-                // Hata işle
-                console.error('Failed to fetch current user:', error);
-            }
-        };
+            const data = await getUserDetails();
+            setFormVals(data);
+        }
 
-        fetchData();
-    }, [dispatch]);
-
+        fetchData()
+    }, [])
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -52,21 +46,13 @@ function Profile() {
 
     const handleSubmit = async (values) => {
         console.log(values)
-
     }
+
 
     const formik = {
-        initialValues: {
-            username: '',
-            email: '',
-            password: '',
-            repeatPassword: '',
-        },
-        enableReinitialize: true,
-        onSubmit: handleSubmit
+        onSubmit: handleSubmit,
+
     }
-
-
 
     return (
         <>
@@ -80,8 +66,9 @@ function Profile() {
 
                 <Grid size={12} mt={0} mb={0} bgcolor={'#303030'} p={5} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} >
                     <Formik
-                        initialValues={formik.initialValues}
+                        initialValues={formVals}
                         onSubmit={formik.onSubmit}
+                        enableReinitialize
                         validationSchema={profileSchema}
                     >
 
@@ -105,6 +92,7 @@ function Profile() {
                                         onChange={handleFileChange}
                                     />
                                 </Box>
+
                                 <Box display={'flex'} mb={2}>
                                     <TextField
                                         type='email'
@@ -116,7 +104,8 @@ function Profile() {
 
                                             }
                                         }}
-                                        value={formik.initialValues.email}
+                                        value={values.email}
+
                                         fullWidth
                                         variant='standard'
                                         label='E-mail'
@@ -133,6 +122,7 @@ function Profile() {
                                         onBlur={handleBlur}
                                         fullWidth
                                         variant='standard'
+                                        value={values.username}
                                         label='Kullanıcı Adı'
                                         name="username"
                                         id="username"
@@ -146,11 +136,12 @@ function Profile() {
                                         onChange={handleChange}
                                         value={values.password}
                                         onBlur={handleBlur}
+                                        autoComplete='off'
                                         fullWidth
                                         variant='standard'
                                         label='Yeni Şifre'
-                                        name="password"
-                                        id='password'
+                                        name="newPassword"
+                                        id='newPpassword'
                                         error={touched.password && Boolean(errors.password)}
                                         helperText={touched.password && errors.password}
                                     />

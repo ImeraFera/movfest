@@ -19,7 +19,9 @@ export const signUp = async (email, password) => {
 export const signIn = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        return userCredential.user;
+        const tokenId = await userCredential.user.getIdToken();
+        sessionStorage.setItem('movfest_token', tokenId)
+        return tokenId;
 
     } catch (error) {
         const message = getErrorMessage(error.code);
@@ -31,19 +33,17 @@ export const signIn = async (email, password) => {
 export const _signOut = async () => {
     try {
         await signOut(auth);
+        sessionStorage.removeItem('movfest_token')
+
     } catch (error) {
         const message = getErrorMessage(error.code);
         throw new Error(message);
     }
 
 }
-
-export const getCurrentUser = () => {
-    console.log(auth.currentUser)
-    return auth.currentUser;
+export const getToken = () => {
+    const token = sessionStorage.getItem('movfest_token');
+    return token || null;
 };
 
-export const onAuthStateChangedListener = (callback) => {
-    return onAuthStateChanged(auth, callback);
-};
 
