@@ -5,9 +5,9 @@ import { Box, Button, CircularProgress, TextField, Typography, } from '@mui/mate
 import { useNavigate } from 'react-router-dom'
 import { notify } from '../utils/toastMessage';
 import { registerSchema } from '../validations/registerSchema';
-import { signUp } from '../services/authService';
 import { setIsLoading } from '../redux/slices/appSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../redux/slices/authSlice';
 function Register() {
 
     const navigation = useNavigate()
@@ -16,16 +16,17 @@ function Register() {
 
     const handleSubmit = async (values) => {
 
+        // ! burda şimdilik işin yok
         dispatch(setIsLoading(true));
         try {
 
-            const user = await signUp(values.email, values.password);
+            dispatch(register(values))
             notify('Başarıyla kayıt oldunuz!', 'success')
             return navigation('/');
 
         } catch (error) {
             notify(error.message, 'error')
-            // console.log(error)
+            console.log(error)
         }
         finally {
             dispatch(setIsLoading(false));

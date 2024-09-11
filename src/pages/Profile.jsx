@@ -7,29 +7,39 @@ import { notify } from '../utils/toastMessage';
 import { loginSchema } from '../validations/loginSchema';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileSchema } from '../validations/profileSchema';
-import { getUserDetails } from '../services/userService';
+import { getUserData } from '../redux/slices/userSlice';
+let i = 0;
+
 function Profile() {
     const [avatar, setAvatar] = useState(null);
     const isLoading = useSelector((state) => state.app.isLoading)
     const fileInputRef = useRef(null);
     const dispatch = useDispatch();
 
-    const [formVals, setFormVals] = useState({ email: '', newPassword: '', username: '' });
     const handleAvatarClick = () => {
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
     };
+    // const [formVals, setFormVals] = useState({ email: '', newPassword: '', username: '' });
+    const userToken = useSelector((state) => state.auth.userToken)
+    const userData = useSelector(({ user }) => {
+        console.log('calisti ' + i + user);
+        i++;
+        return {
+            email: user?.email || '',
+            emailVerified: user?.emailVerified || false,
+            localId: user?.localId || '',
+        }
+    });
 
     useEffect(() => {
+        dispatch(getUserData(userToken));
+    }, [dispatch, userToken]);
 
-        const fetchData = async () => {
-            const data = await getUserDetails();
-            setFormVals(data);
-        }
 
-        fetchData()
-    }, [])
+
+
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -50,8 +60,12 @@ function Profile() {
 
 
     const formik = {
+        initialValues: {
+            email: '',
+            newPassword: '',
+            username: ''
+        },
         onSubmit: handleSubmit,
-
     }
 
     return (
@@ -66,7 +80,7 @@ function Profile() {
 
                 <Grid size={12} mt={0} mb={0} bgcolor={'#303030'} p={5} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'} >
                     <Formik
-                        initialValues={formVals}
+                        initialValues={formik.initialValues}
                         onSubmit={formik.onSubmit}
                         enableReinitialize
                         validationSchema={profileSchema}

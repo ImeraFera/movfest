@@ -7,8 +7,8 @@ export const signUp = async (email, password) => {
     try {
         const user = (await createUserWithEmailAndPassword(auth, email, password)).user;
         await sendEmailVerification(user);
-
-
+        const tokenId = await user.getIdToken();
+        return tokenId;
     } catch (error) {
         console.log(error)
         const message = getErrorMessage(error.code);
@@ -20,7 +20,6 @@ export const signIn = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const tokenId = await userCredential.user.getIdToken();
-        sessionStorage.setItem('movfest_token', tokenId)
         return tokenId;
 
     } catch (error) {
@@ -33,8 +32,6 @@ export const signIn = async (email, password) => {
 export const _signOut = async () => {
     try {
         await signOut(auth);
-        sessionStorage.removeItem('movfest_token')
-
     } catch (error) {
         const message = getErrorMessage(error.code);
         throw new Error(message);

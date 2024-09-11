@@ -6,21 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { _signOut, getToken } from '../services/authService';
 import { notify } from '../utils/toastMessage'
 import { getErrorMessage } from '../errors/ErrorCodes'
-// import { login } from '../redux/slices/authSlice';
-
+import { logout } from '../redux/slices/authSlice';
 
 function Navbar() {
 
     const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
-    const [token, setToken] = useState(null);
-
-    useEffect(() => {
-
-        const token = getToken();
-        setToken(token);
-
-    }, [])
+    const dispatch = useDispatch();
+    const userToken = useSelector((state) => state.auth.userToken)
 
     const handleMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -43,8 +36,9 @@ function Navbar() {
 
     const handleSignOut = async () => {
         try {
+            dispatch(logout())
             notify('Başarıyla çıkış yaptınız!', 'success')
-            await _signOut();
+
             return goto('/');
         } catch (error) {
             notify(error.message, 'error')
@@ -125,39 +119,54 @@ function Navbar() {
                     }}
                 >
 
-                    {(token &&
+                    {(userToken ? (
                         <Box>
-                            <MenuItem sx={{
-                                '&:hover': {
-                                    color: '#ff4081',
-                                },
-                            }}
-                                onClick={() => goto('/profilim')}  >Profilim</MenuItem>
-                            <MenuItem sx={{
-                                '&:hover': {
-                                    color: '#ff4081',
-                                },
-                            }} onClick={handleSignOut}>Çıkış Yap</MenuItem>
+                            <MenuItem
+                                sx={{
+                                    '&:hover': {
+                                        color: '#ff4081',
+                                    },
+                                }}
+                                onClick={() => goto('/profilim')}
+                            >
+                                Profilim
+                            </MenuItem>
+                            <MenuItem
+                                sx={{
+                                    '&:hover': {
+                                        color: '#ff4081',
+                                    },
+                                }}
+                                onClick={handleSignOut}
+                            >
+                                Çıkış Yap
+                            </MenuItem>
                         </Box>
-
-                    )}
-                    {(!token &&
+                    ) : (
                         <Box>
-                            <MenuItem sx={{
-                                '&:hover': {
-                                    color: '#ff4081',
-                                },
-                            }} onClick={() => goto('/giris')}>Giriş Yap</MenuItem>
-                            <MenuItem sx={{
-                                '&:hover': {
-                                    color: '#ff4081',
-                                },
-                            }} onClick={() => navigate('/kayit')}>
+                            <MenuItem
+                                sx={{
+                                    '&:hover': {
+                                        color: '#ff4081',
+                                    },
+                                }}
+                                onClick={() => goto('/giris')}
+                            >
+                                Giriş Yap
+                            </MenuItem>
+                            <MenuItem
+                                sx={{
+                                    '&:hover': {
+                                        color: '#ff4081',
+                                    },
+                                }}
+                                onClick={() => navigate('/kayit')}
+                            >
                                 Kayıt Ol
                             </MenuItem>
                         </Box>
+                    ))}
 
-                    )}
 
                 </Menu>
 
@@ -174,22 +183,23 @@ function Navbar() {
                         onKeyDown={toggleDrawer(false)}
                     >
                         <List>
-                            <ListItem button>
+                            <ListItem button onClick={() => navigate('/filmler')}>
                                 <ListItemText primary="Filmler" />
                             </ListItem>
-                            <ListItem button>
+                            <ListItem button onClick={() => navigate('/kategoriler')}>
                                 <ListItemText primary="Kategoriler" />
                             </ListItem>
-                            <ListItem button>
+                            <ListItem button onClick={() => navigate('/populer')}>
                                 <ListItemText primary="Popüler" />
                             </ListItem>
-                            <ListItem button>
+                            <ListItem button onClick={() => navigate('/yeniler')}>
                                 <ListItemText primary="Yeniler" />
                             </ListItem>
-                            <ListItem button>
+                            <ListItem button onClick={() => navigate('/iletisim')}>
                                 <ListItemText primary="İletişim" />
                             </ListItem>
                         </List>
+
                     </Box>
                 </Drawer>
             </Toolbar>

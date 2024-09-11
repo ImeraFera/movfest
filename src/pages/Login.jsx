@@ -7,7 +7,7 @@ import { notify } from '../utils/toastMessage';
 import { loginSchema } from '../validations/loginSchema';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoading } from '../redux/slices/appSlice';
-import { signIn } from '../services/authService';
+import { login } from '../redux/slices/authSlice';
 
 // import { login, } from '../redux/slices/authSlice';
 
@@ -20,8 +20,7 @@ function Login() {
         dispatch(setIsLoading(true));
         try {
 
-            // dispatch(login(values))
-            await signIn(values.email, values.password);
+            dispatch(login(values))
             notify('Giriş Başarılı!', 'success',)
             return navigation('/')
 

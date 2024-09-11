@@ -2,22 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { getToken } from '../services/authService';
 import { CircularProgress } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { notify } from './toastMessage';
 
 function ProtectedRoute() {
-    const [loading, setLoading] = useState(true);
-    const [token, setToken] = useState(null);
+    const userToken = useSelector((state) => state.auth.userToken)
 
-    useEffect(() => {
-        const token = getToken();
-        setToken(token);
-        setLoading(false);
-    }, []);
-
-    if (loading) {
-        return <CircularProgress color="primary" />
+    if (userToken) {
+        return <Outlet />
+    } else {
+        notify('Lütfen giriş yapınız!', 'error')
+        return <Navigate to="/giris" />;
     }
 
-    return token ? <Outlet /> : <Navigate to="/giris" />;
+
 }
 
 export default ProtectedRoute;
