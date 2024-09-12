@@ -8,6 +8,7 @@ import { registerSchema } from '../validations/registerSchema';
 import { setIsLoading } from '../redux/slices/appSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/slices/authSlice';
+import { motion } from 'framer-motion';
 function Register() {
 
     const navigation = useNavigate()
@@ -15,8 +16,6 @@ function Register() {
     const dispatch = useDispatch();
 
     const handleSubmit = async (values) => {
-
-        // ! burda şimdilik işin yok
         dispatch(setIsLoading(true));
         try {
 
@@ -45,7 +44,10 @@ function Register() {
     }
 
     return (
-        <>
+        <motion.div
+            animate={{ y: [100, 0], opacity: [0, 0.5, 1] }}
+            transition={{ duration: 0.5 }}
+        >
             <Grid container p={5} >
 
                 <Grid size={12} bgcolor={'#303030'} display={'flex'} p={2} flexDirection={'column'}>
@@ -138,7 +140,7 @@ function Register() {
                 </Grid>
 
             </Grid>
-        </>
+        </motion.div>
 
     )
 }

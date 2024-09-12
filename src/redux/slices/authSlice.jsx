@@ -18,8 +18,8 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
     'auth/register',
-    async ({ email, password }) => {
-        const tokenId = await signUp(email, password);
+    async ({ username, email, password }) => {
+        const tokenId = await signUp(username, email, password);
         sessionStorage.setItem('movfestToken', tokenId);
         return tokenId; // Action payload olarak döndür
 

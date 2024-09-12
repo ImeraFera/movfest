@@ -19,7 +19,7 @@ function RandomMoviesCarousel() {
     return (
         <>
             <Grid container >
-                <Grid size={12}>
+                <Grid size={12} bgcolor={'#303030'}>
                     <Swiper
                         modules={[Navigation, Autoplay]}
                         spaceBetween={5}

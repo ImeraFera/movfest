@@ -4,7 +4,7 @@ function PageContainer({ children }) {
     return (
         <Container maxWidth={'xl'} sx={{ marginTop: 4, justifyContent: 'center', }}>
             {children}
-        </Container>
+        </Container >
     )
 }
 

@@ -3,19 +3,23 @@ import { Paper, Box, Typography, Container, Card, CardContent, CardActions, Butt
 import Grid from '@mui/material/Grid2';
 import RandomMoviesCarousel from '../components/RandomMoviesCarousel';
 import MovieCard from '../components/MovieCard';
-
+import { motion } from 'framer-motion'
 function Dashboard() {
 
     return (
 
-        <>
+        <motion.div
+            animate={{ y: [100, 0], opacity: [0, 0.5, 1] }}
+            transition={{ duration: 0.5 }}
+        >
+
             <Box m={2}>
                 <Typography variant='h4'>Bugün Ne İzlesem ?</Typography>
             </Box>
             <RandomMoviesCarousel></RandomMoviesCarousel>
             {/* sütun 2 */}
             <Grid container spacing={2}  >
-                <Grid size={{ lg: 9, md: 9, sm: 9, xs: 12 }} >
+                <Grid bgcolor={'#303030'} size={{ lg: 9, md: 9, sm: 9, xs: 12 }} >
                     <Box m={2}>
                         <Typography variant='h4'>Yeni Filmler</Typography>
                     </Box>
@@ -57,12 +61,12 @@ function Dashboard() {
                             <MovieCard></MovieCard>
                         </Grid>
                     </Stack>
-                    <Stack alignItems={'center'}>
+                    <Stack my={2} alignItems={'center'}>
                         <Pagination count={12} size='large' color="primary" />
                     </Stack>
                 </Grid >
                 {/* sütun 2 */}
-                <Grid size={{ lg: 3, md: 3, sm: 3, xs: 12, }
+                <Grid bgcolor={'#303030'} size={{ lg: 3, md: 3, sm: 3, xs: 12, }
                 } >
                     <Box m={2} >
                         <Typography variant='h4'>Trend Filmler</Typography>
@@ -75,7 +79,7 @@ function Dashboard() {
                 </Grid >
             </Grid >
 
-        </>
+        </motion.div >
 
     );
 }

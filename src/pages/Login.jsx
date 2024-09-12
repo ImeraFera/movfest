@@ -8,6 +8,7 @@ import { loginSchema } from '../validations/loginSchema';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsLoading } from '../redux/slices/appSlice';
 import { login } from '../redux/slices/authSlice';
+import { motion } from 'framer-motion';
 
 // import { login, } from '../redux/slices/authSlice';
 
@@ -43,7 +44,10 @@ function Login() {
     }
 
     return (
-        <>
+        <motion.div
+            animate={{ y: [100, 0], opacity: [0, 0.5, 1] }}
+            transition={{ duration: 0.5 }}
+        >
             <Grid container p={5} >
 
                 <Grid size={12} bgcolor={'#303030'} display={'flex'} p={2} flexDirection={'column'}>
@@ -108,7 +112,7 @@ function Login() {
                 </Grid>
 
             </Grid>
-        </>
+        </motion.div>
 
     )
 }

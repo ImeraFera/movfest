@@ -21,7 +21,10 @@ function App() {
 
         <PageContainer >
 
-          <MainRoutes></MainRoutes>
+
+          <MainRoutes>
+          </MainRoutes>
+
         </PageContainer>
 
         <Footer />

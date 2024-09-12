@@ -1,13 +1,18 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../config/Firebase';
 import { getErrorMessage } from "../errors/ErrorCodes";
+import { axiosConfig } from "../config/Axios";
 
 
-export const signUp = async (email, password) => {
+export const signUp = async (username, email, password) => {
+
     try {
         const user = (await createUserWithEmailAndPassword(auth, email, password)).user;
         await sendEmailVerification(user);
         const tokenId = await user.getIdToken();
+
+        await axiosConfig.post('/api/users/save-user', { username: username, email: email })
+
         return tokenId;
     } catch (error) {
         console.log(error)

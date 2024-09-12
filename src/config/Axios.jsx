@@ -1,7 +1,7 @@
 import axios from "axios";
-import { AUTH_API_URL } from "./CONFIG";
+import { DB_URL } from "./CONFIG";
 
 
 export const axiosConfig = axios.create({
-    baseURL: AUTH_API_URL,
+    baseURL: DB_URL,
 })
