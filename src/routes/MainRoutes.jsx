@@ -18,7 +18,7 @@ function MainRoutes() {
             <Route path="/iletisim" element={<Contact />} />
             <Route path="/kategoriler" element={<Categories />} />
             <Route path="/kategoriler/:kategori_ad" element={<Categories />} />
-            <Route path="/filmler/:film_id" element={<MovieDetails />} />
+            <Route path="/filmler/:movieId" element={<MovieDetails />} />
 
             <Route element={<ProtectedRoute />}>
                 <Route path="/profilim" element={<Profile />} />

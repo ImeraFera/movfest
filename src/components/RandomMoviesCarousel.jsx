@@ -7,15 +7,10 @@ import 'swiper/swiper-bundle.css';
 import CarouselItem from '../components/CarouselItem';
 import Grid from '@mui/material/Grid2';
 
-function RandomMoviesCarousel() {
+function RandomMoviesCarousel(prop) {
 
-    const [value, setValue] = useState(50);
+    const { movies } = prop;
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    const slides = Array.from({ length: 10 });
     return (
         <>
             <Grid container >
@@ -57,9 +52,9 @@ function RandomMoviesCarousel() {
                         slidesPerView={5}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                     >
-                        {slides.map((_, index) => (
-                            <SwiperSlide key={index}>
-                                <CarouselItem />
+                        {movies.map((movie) => (
+                            <SwiperSlide key={movie.id}>
+                                <CarouselItem movie={movie} />
                             </SwiperSlide>
                         ))}
 

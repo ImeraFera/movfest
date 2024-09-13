@@ -3,16 +3,16 @@ import { getUserDetails } from '../../services/userService';
 import { createSelector } from 'reselect';
 
 const userInitialState = {
-    localId: null,
     email: null,
     emailVerified: false,
+    username: null,
     status: 'idle',  // 'idle', 'loading', 'succeeded', 'failed' gibi durumlar
     error: null,
 };
 
-export const getUserData = createAsyncThunk('user/getUserData', async (userToken) => {
+export const getUserData = createAsyncThunk('user/getUserData', async (localId) => {
     try {
-        const response = await getUserDetails(userToken);
+        const response = await getUserDetails(localId);
         return response;  // Payload olarak döner
     } catch (error) {
         console.error('Error fetching user data:', error);
@@ -33,8 +33,9 @@ export const userSlice = createSlice({
             .addCase(getUserData.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.email = action.payload.email;
-                state.localId = action.payload.localId;
                 state.emailVerified = action.payload.emailVerified;
+                state.username = action.payload.username;
+
             })
             .addCase(getUserData.rejected, (state, action) => {
                 state.status = 'failed';  // Yüklenme başarısız
@@ -51,7 +52,8 @@ export const selectUserData = createSelector(
     (user) => ({
         email: user.email,
         emailVerified: user.emailVerified,
-        localId: user.localId
+        username: user.username,
+
     })
 );
 

@@ -1,11 +1,11 @@
 import { axiosConfig } from '../config/Axios';
 import { auth } from '../config/Firebase';
-import { AUTH_API_URL } from '../config/CONFIG';
+import { AUTH_API_URL, DB_URL } from '../config/CONFIG';
 
-export const getUserDetails = async (userToken) => {
+export const getUserDetails = async (localId) => {
     try {
-        const response = await axiosConfig.post(AUTH_API_URL, { idToken: userToken })
-        return response.data.users[0];
+        const response = await axiosConfig.get(DB_URL + '/api/users/' + localId);
+        return response.data;
     } catch (error) {
         console.log(error);
     }

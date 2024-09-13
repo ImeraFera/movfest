@@ -5,7 +5,7 @@ import { Box, Button, CircularProgress, TextField, Typography, Alert, FormHelper
 import { useNavigate } from 'react-router-dom'
 import { notify } from '../utils/toastMessage';
 import { loginSchema } from '../validations/loginSchema';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
 import { setIsLoading } from '../redux/slices/appSlice';
 import { login } from '../redux/slices/authSlice';
 import { motion } from 'framer-motion';
@@ -17,19 +17,18 @@ function Login() {
     const navigation = useNavigate()
     const isLoading = useSelector((state) => state.app.isLoading)
     const dispatch = useDispatch();
+
     const handleSubmit = async (values) => {
         dispatch(setIsLoading(true));
-        try {
 
-            dispatch(login(values))
+        try {
+            // ! await gerekli silme !
+            await dispatch(login(values));
             notify('Giriş Başarılı!', 'success',)
             return navigation('/')
 
         } catch (error) {
-            console.log(error)
-            notify('E-mail veya şifre yanlış!', 'error')
-        }
-        finally {
+            notify(error.message, 'error')
             dispatch(setIsLoading(false));
         }
 

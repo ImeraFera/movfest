@@ -1,6 +1,4 @@
-/* From Uiverse.io by joe-watson-sbf */
 .flip-card {
-    background-color: transparent;
     height: 23.5em;
     perspective: 1000px;
     font-family: sans-serif;
@@ -54,7 +52,7 @@
     justify-content: center;
     transform: rotateY(180deg);
     border: 1px solid #AB1779;
-    background-color: #3030307c;
+    background-color: #404040;
 }
 
 .imdb-point {

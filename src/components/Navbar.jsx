@@ -3,7 +3,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { _signOut, getToken } from '../services/authService';
 import { notify } from '../utils/toastMessage'
 import { getErrorMessage } from '../errors/ErrorCodes'
 import { logout } from '../redux/slices/authSlice';

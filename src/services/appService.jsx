@@ -1,15 +1,30 @@
 import { axiosConfig } from '../config/Axios';
-import { APP_URL } from '../config/CONFIG';
+import { DB_URL } from '../config/CONFIG';
 
-export const getAllMovies = async () => {
-
+export const getAllMovies = async (pageNumber) => {
+    const size = 12;
     try {
-
-        // const response = axiosConfig.get(APP_URL + '/api')
+        const response = await axiosConfig.get(`${DB_URL}/api/movies?page=${pageNumber}&size=${size}`);
+        return response;
 
     } catch (error) {
         console.log(error)
+        throw error;
+
     }
 
 
+}
+
+export const getMovieById = async (movieId) => {
+
+    try {
+
+        const response = await axiosConfig.get(`${DB_URL}/api/movies/${movieId}`)
+        return response;
+
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
 }

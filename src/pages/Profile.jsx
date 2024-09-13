@@ -8,39 +8,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import { profileSchema } from '../validations/profileSchema';
 import { getUserData, selectUserData } from '../redux/slices/userSlice';
 import { setIsLoading } from '../redux/slices/appSlice';
-
-// import { selectUserData, } from '../redux/slices/userSlice';
+import { motion } from 'framer-motion';
 
 function Profile() {
+
     const dispatch = useDispatch();
     const [avatar, setAvatar] = useState(null);
     const isLoading = useSelector(({ app }) => app.isLoading)
     const fileInputRef = useRef(null);
 
-    const handleAvatarClick = () => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
-
     const userData = useSelector(selectUserData)
-    const userToken = useSelector((state) => state.auth.userToken)
-
+    const userLocalId = useSelector(({ auth }) => auth.localId)
 
     useEffect(() => {
-        const fetchUserData = async (token) => {
+        const fetchUserData = async (userLocalId) => {
             dispatch(setIsLoading(true));
             try {
-                dispatch(getUserData(token))
+                dispatch(getUserData(userLocalId))
             } catch (error) {
                 console.log(error);
             } finally {
                 dispatch(setIsLoading(false));
             }
         };
-        fetchUserData(userToken);
-    }, [dispatch, userToken]);
-
+        fetchUserData(userLocalId);
+    }, [dispatch, userLocalId]);
+    const handleAvatarClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -70,7 +67,10 @@ function Profile() {
     }
 
     return (
-        <>
+        <motion.div
+            animate={{ y: [100, 0], opacity: [0, 0.5, 1] }}
+            transition={{ duration: 0.5 }}
+        >
             <Grid container p={5} spacing={2} >
 
                 <Grid size={12} mt={0} mb={0} bgcolor={'#303030'} display={'flex'} p={2} flexDirection={'column'}>
@@ -85,7 +85,7 @@ function Profile() {
                         <Formik
                             initialValues={{
                                 email: userData.email || '',
-                                username: '',
+                                username: userData.username || '',
                                 newPassword: '',
                             }}
                             onSubmit={formik.onSubmit}
@@ -184,7 +184,7 @@ function Profile() {
                 </Grid>
 
             </Grid >
-        </>
+        </motion.div>
 
     )
 }
