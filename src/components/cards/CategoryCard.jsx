@@ -1,8 +1,8 @@
 import { Box, Grid2, Link, Typography } from '@mui/material'
 import React from 'react'
 
-function CategoryCard({ props }) {
-    const { title, link } = props;
+function CategoryCard(props) {
+    const { title, link, id } = props;
     return (
 
         <Grid2 size={3} >
@@ -18,5 +18,6 @@ function CategoryCard({ props }) {
             </Box>
         </Grid2>)
 }
+
 
 export default CategoryCard

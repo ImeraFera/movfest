@@ -9,6 +9,7 @@ import Register from '../pages/Register'
 import Login from '../pages/Login'
 import Profile from '../pages/Profile'
 import ProtectedRoute from '../utils/ProtectedRoute';
+import MoviesByCategory from '../pages/MoviesByCategory'
 
 function MainRoutes() {
     return (
@@ -17,7 +18,7 @@ function MainRoutes() {
             <Route path="/filmler" element={<Dashboard />} />
             <Route path="/iletisim" element={<Contact />} />
             <Route path="/kategoriler" element={<Categories />} />
-            <Route path="/kategoriler/:kategori_ad" element={<Categories />} />
+            <Route path="/kategoriler/:genreId" element={<MoviesByCategory />} />
             <Route path="/filmler/:movieId" element={<MovieDetails />} />
 
             <Route element={<ProtectedRoute />}>

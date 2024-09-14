@@ -5,34 +5,25 @@ import RandomMoviesCarousel from '../components/RandomMoviesCarousel';
 import MovieCard from '../components/MovieCard';
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovies, setIsLoading } from '../redux/slices/appSlice';
+import { getGenres, getMovies, setIsLoading } from '../redux/slices/appSlice';
 function Dashboard() {
     const dispatch = useDispatch();
     // const isLoading = useSelector(({ app }) => app.isLoading);
     const [pageNumber, setPageNumber] = useState(1);
-
-    const fetchMovies = async (pageNumber) => {
-        dispatch(setIsLoading(true));
-        try {
-            const res = await dispatch(getMovies(pageNumber));
-        } catch (error) {
-            console.log(error.message);
-        }
-        finally {
-            dispatch(setIsLoading(false));
-        }
-    };
+    const totalPages = useSelector(({ app }) => app.totalPages);
 
     const handlePageChange = (event, value) => {
         setPageNumber(value);
     };
 
     useEffect(() => {
-        fetchMovies(pageNumber - 1);
+
+        dispatch(getMovies(pageNumber));
+        dispatch(getGenres());
+
     }, [pageNumber]);
 
     const movies = useSelector(({ app }) => app.movies);
-    const totalPages = useSelector(({ app }) => app.totalPages);
 
     return (
 
@@ -45,7 +36,9 @@ function Dashboard() {
                 <Typography variant='h4'>Bugün Ne İzlesem ?</Typography>
             </Box>
             {movies && (
+
                 <RandomMoviesCarousel movies={movies}></RandomMoviesCarousel>
+
             )}
             <Grid container spacing={2}  >
                 <Grid bgcolor={'#303030'} size={{ lg: 9, md: 9, sm: 9, xs: 12 }} >
@@ -54,10 +47,10 @@ function Dashboard() {
                     </Box>
                     <Stack direction={'row'} flexWrap={'wrap'} justifyContent={'center'}   >
 
-
                         <>
                             {
                                 movies && movies.map((movie) => {
+
                                     return (
                                         <Grid key={movie.id} size={{ lg: 3, md: 4, sm: 6, xs: 12, }} >
                                             <Link
@@ -65,15 +58,13 @@ function Dashboard() {
                                                 underline='none'
                                                 href={'/filmler/' + movie.id}
                                             >
-                                                <MovieCard title={movie.title} year={movie.year} id={movie.id} genres={movie.genres}></MovieCard>
+                                                <MovieCard poster={movie.poster_path} overview={movie.overview} title={movie.title} year={movie.releases_date} id={movie.id} genres={movie.genre_ids}></MovieCard>
                                             </Link>
                                         </Grid>
                                     )
                                 })
                             }
-
                         </>
-
 
                     </Stack>
                     {/*  Pagination */}
@@ -91,12 +82,12 @@ function Dashboard() {
 
                         {
                             movies && movies.map((movie, index) => {
-                                if (index < 3)
+                                if (index < 5)
                                     return (
 
                                         <Grid size={12} key={movie.id}>
                                             <Link underline='none' color='white' href={'/filmler/' + movie.id}>
-                                                <MovieCard title={movie.title} year={movie.year} poster={movie.poster} genres={movie.genres} id={movie.id} ></MovieCard>
+                                                <MovieCard poster={movie.poster_path} overview={movie.overview} title={movie.title} year={movie.releases_date} id={movie.id} genres={movie.genre_ids}></MovieCard>
                                             </Link>
                                         </Grid>
                                     )

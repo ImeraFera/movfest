@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
-import CarouselItem from '../components/CarouselItem';
 import Grid from '@mui/material/Grid2';
+import { Link } from '@mui/material';
+import MovieCard from './MovieCard';
 
 function RandomMoviesCarousel(prop) {
 
@@ -54,7 +54,9 @@ function RandomMoviesCarousel(prop) {
                     >
                         {movies.map((movie) => (
                             <SwiperSlide key={movie.id}>
-                                <CarouselItem movie={movie} />
+                                <Link color='white' underline='none' href={'/filmler/' + movie.id}>
+                                    <MovieCard poster={movie.poster_path} overview={movie.overview} title={movie.title} year={movie.releases_date} id={movie.id} genres={movie.genre_ids}></MovieCard>
+                                </Link>
                             </SwiperSlide>
                         ))}
 
